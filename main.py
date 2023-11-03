@@ -7,7 +7,13 @@ west_of_house_description = "You are standing in front of an old, white, dilapid
 front_porch_name = "FRONT PORCH"
 front_porch_description = "You are stading on the front porch of an old, dilapidated house."
 
-def printRoomDescription():
+# starting place
+room_name = west_of_house_name
+room_description = west_of_house_description
+
+# Game loop
+while(1):
+    # print current room description
     print("")
     print("####################")
     print(room_name)
@@ -16,7 +22,7 @@ def printRoomDescription():
     print(room_description)
     print("")
 
-def getUserInstruction():
+    # get instruction from the user
     user_instruction = ""
     while user_instruction == "":
         instruction = input("What do you do?  ")
@@ -35,33 +41,21 @@ def getUserInstruction():
             user_instruction = "EXIT"
         elif instruction == "quit" or instruction == "Quit" or instruction == "QUIT":
             user_instruction = "EXIT"
-    return user_instruction
-
-room_name = west_of_house_name
-room_description = west_of_house_description
-
-# Game loop
-while(1):
-    # print current room description
-    printRoomDescription()
-
-    # get instruction from the user
-    instruction = getUserInstruction()
 
     # handle general instructions
-    if instruction == "LOOK":
+    if user_instruction == "LOOK":
         continue
-    if instruction == "EXIT":
+    if user_instruction == "EXIT":
         break
 
     # handle room-specific instructions
     if room_name == west_of_house_name:
-        if instruction == "EAST":
+        if user_instruction == "EAST":
             room_name = front_porch_name
             room_description = front_porch_description
             continue
     if room_name == front_porch_name:
-        if instruction == "WEST":
+        if user_instruction == "WEST":
             room_name = west_of_house_name
             room_description = west_of_house_description
             continue
