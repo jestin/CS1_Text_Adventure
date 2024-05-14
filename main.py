@@ -1,65 +1,89 @@
-room_name = ""
-room_description = ""
+from inventory import *
+from user_input import *
+from rooms import *
 
-west_of_house_name = "WEST OF HOUSE"
-west_of_house_description = "You are standing in front of an old, white, dilapidated house."
-
-front_porch_name = "FRONT PORCH"
-front_porch_description = "You are stading on the front porch of an old, dilapidated house."
-
-# starting place
-room_name = west_of_house_name
-room_description = west_of_house_description
+# game state variables
+current_room = 0
+prev_room = -1
+        
+def experience_room(command_parts):
+    display_message = ""
+    cur_room_data = rooms[current_room]
+    if command_parts[0] == "north":
+        if cur_room_data[ROOM_NORTH] > -1:
+            return cur_room_data[ROOM_NORTH]
+        else:
+            display_message = "You can't go that way"
+    elif command_parts[0] == "south":
+        if cur_room_data[ROOM_SOUTH] > -1:
+            return cur_room_data[ROOM_SOUTH]
+        else:
+            display_message = "You can't go that way"
+    elif command_parts[0] == "east":
+        if cur_room_data[ROOM_EAST] > -1:
+            return cur_room_data[ROOM_EAST]
+        else:
+            display_message = "You can't go that way"
+    elif command_parts[0] == "west":
+        if cur_room_data[ROOM_WEST] > -1:
+            return cur_room_data[ROOM_WEST]
+        else:
+            display_message = "You can't go that way"
+    elif command_parts[0] == "take":
+        if len(command_parts) < 2:
+            display_message = "Take what?"
+        else:
+            room_items = cur_room_data[ROOM_ITEMS]
+            item_to_take = " ".join(command_parts[1:])
+            if item_to_take in room_items:
+                item_index = room_items.index(item_to_take)
+                item_description = cur_room_data[ROOM_ITEM_DESCRIPTIONS][item_index]
+                add_to_inventory(item_to_take)
+                cur_room_data[ROOM_ITEMS].remove(item_to_take)
+                cur_room_data[ROOM_ITEM_DESCRIPTIONS].remove(item_description)
+                display_message = item_to_take + " taken"
+            else:
+                display_message = "There is no " + item_to_take + " here"
+    elif command_parts[0] == "drop":
+        if len(command_parts) < 2:
+            display_message = "Drop what?"
+        else:
+            item_to_drop = " ".join(command_parts[1:])
+            item_from_inventory = remove_from_inventory(item_to_drop)
+            if item_from_inventory == "":
+                display_message = "You do not have a " + item_to_drop
+            else:
+                display_message = item_from_inventory + " dropped"
+                cur_room_data[ROOM_ITEMS].append(item_from_inventory)
+                cur_room_data[ROOM_ITEM_DESCRIPTIONS].append(
+                    "A " + item_from_inventory + " is laying on the floor."
+                )
+            
+    else:
+        display_message = "I don't understand that"
+        
+    # Display output
+    print("")
+    print(display_message)
+    print("")
+    return current_room
 
 # Game loop
-while(1):
-    # print current room description
-    print("")
-    print("####################")
-    print(room_name)
-    print("####################")
-    print("")
-    print(room_description)
-    print("")
-
-    # get instruction from the user
-    user_instruction = ""
-    while user_instruction == "":
-        instruction = input("What do you do?  ")
+while True:
+    if current_room != prev_room:
+        display_room_info(current_room)
+        prev_room = current_room
         
-        if instruction == "north" or instruction == "North" or instruction == "NORTH":
-            user_instruction = "NORTH"
-        elif instruction == "south" or instruction == "South" or instruction == "SOUTH":
-            user_instruction = "SOUTH"
-        elif instruction == "east" or instruction == "East" or instruction == "EAST":
-            user_instruction = "EAST"
-        elif instruction == "west" or instruction == "West" or instruction == "WEST":
-            user_instruction = "WEST"
-        elif instruction == "look" or instruction == "Look" or instruction == "LOOK":
-            user_instruction = "LOOK"
-        elif instruction == "exit" or instruction == "Exit" or instruction == "EXIT":
-            user_instruction = "EXIT"
-        elif instruction == "quit" or instruction == "Quit" or instruction == "QUIT":
-            user_instruction = "EXIT"
-
-    # handle general instructions
-    if user_instruction == "LOOK":
-        continue
-    if user_instruction == "EXIT":
+    command_parts = get_user_input(current_room)
+    
+    # Change the game state
+    if command_parts[0] == "quit":
         break
-
-    # handle room-specific instructions
-    if room_name == west_of_house_name:
-        if user_instruction == "EAST":
-            room_name = front_porch_name
-            room_description = front_porch_description
-            continue
-    if room_name == front_porch_name:
-        if user_instruction == "WEST":
-            room_name = west_of_house_name
-            room_description = west_of_house_description
-            continue
-
-    print("")
-    print("That doesn't work here")
-    print("")
+    elif command_parts[0] == "inv" or command_parts[0] == "inventory":
+        show_inventory()
+    elif command_parts[0] == "look":
+        prev_room = -1
+    else:
+        current_room = experience_room(command_parts)
+   
+print("Thanks for playing!")

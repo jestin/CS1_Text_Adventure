@@ -2,3 +2,5 @@
 *.swp
 *.un~
 *.swo
+__pycache__/
+*.zip
