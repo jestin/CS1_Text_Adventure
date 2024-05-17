@@ -29,6 +29,16 @@ def experience_room(command_parts):
             return cur_room_data[ROOM_WEST]
         else:
             display_message = "You can't go that way"
+    elif command_parts[0] == "up":
+        if cur_room_data[ROOM_UP] > -1:
+            return cur_room_data[ROOM_UP]
+        else:
+            display_message = "You can't go that way"
+    elif command_parts[0] == "down":
+        if cur_room_data[ROOM_DOWN] > -1:
+            return cur_room_data[ROOM_DOWN]
+        else:
+            display_message = "You can't go that way"
     elif command_parts[0] == "take":
         if len(command_parts) < 2:
             display_message = "Take what?"

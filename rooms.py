@@ -6,8 +6,10 @@ ROOM_NORTH = 2
 ROOM_SOUTH = 3
 ROOM_EAST = 4
 ROOM_WEST = 5
-ROOM_ITEMS = 6
-ROOM_ITEM_DESCRIPTIONS = 7
+ROOM_UP = 6
+ROOM_DOWN = 7
+ROOM_ITEMS = 8
+ROOM_ITEM_DESCRIPTIONS = 9
 
 def display_room_info(room):
     os.system('cls||clear')
@@ -21,10 +23,12 @@ def display_room_info(room):
 
 entrance_data = (
     "Entrance",
-    "You stand in a grand entranceway",
+    "You stand in a large entranceway.  There are rooms to the east and west, a hallway leading north, and a grand staircase leading to the upper floors.",
     1,
     -1,
+    4,
     -1,
+    5,
     -1,
     [],
     []
@@ -37,6 +41,8 @@ dining_room_data = (
     0,
     -1,
     2,
+    -1,
+    -1,
     ["fork", "knife", "spoon"],
     [
         "There is a single fork on the table.",
@@ -52,6 +58,8 @@ drawing_room_data = (
     -1,
     1,
     -1,
+    -1,
+    -1,
     ["decantor"],
     ["There is a decantor on the minibar."]
 )
@@ -63,13 +71,44 @@ kitchen_data = (
     1,
     -1,
     -1,
+    -1,
+    -1,
     ["cookbook"],
     ["A cookbook laying open on one of the prep tables."]
 )
+
+ballroom_data = (
+    "Ballroom",
+    "An elegant ballroom decorated with lavish curtains, a priceless chandelier, and a gleaming wooden dance floor.",
+    -1,
+    -1,
+    -1,
+    0,
+    -1,
+    -1,
+    [],
+    []
+)
+
+upstiars_hallway_data = (
+    "Upstairs Hallway",
+    "A wide hallway with doors to the east, west and south.  There is an end table near a window that has a birdcage sitting on it.",
+    -1,
+    -1,
+    -1,
+    -1,
+    -1,
+    0,
+    [],
+    []
+)
+
 
 rooms = (
     entrance_data,
     dining_room_data,
     drawing_room_data,
-    kitchen_data
+    kitchen_data,
+    ballroom_data,
+    upstiars_hallway_data
 )
