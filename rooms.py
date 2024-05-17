@@ -29,7 +29,7 @@ entrance_data = (
     1,
     -1,
     4,
-    -1,
+    6,
     5,
     -1,
     [],
@@ -117,6 +117,51 @@ upstiars_hallway_data = (
     ""
 )
 
+parlor_data = (
+    "Parlor",
+    "Fancy sofas and comfortable looking armchairs are arranged along the walls of this room, which are adorned with old portraits of long-dead former owners of the house.  There is a door to the north.",
+    7,
+    -1,
+    0,
+    -1,
+    -1,
+    -1,
+    [],
+    [],
+    [],
+    ""
+)
+
+powder_room_data = (
+    "Powder Room",
+    "An elegant bathroom with a shining vanity, makeup lights, and a tacky fuzzy toilet seat cover.",
+    -1,
+    6,
+    -1,
+    -1,
+    -1,
+    8,
+    ["rug"],
+    ["A rug matching the toilet seat cover is in front of the toilet.  Gross."],
+    ["decanter"],
+    "A ghostly yet booming voice yells \"Bring me a drink if you wish to pass!\""
+)
+
+crawl_space_data = (
+    "Crawl Space",
+    "A dark, musty crawl space under the house extends east to west.",
+    -1,
+    -1,
+    -1,
+    -1,
+    7,
+    -1,
+    [],
+    [],
+    ["rug"],
+    "Through the gross rug?"
+)
+
 
 rooms = (
     entrance_data,
@@ -124,5 +169,8 @@ rooms = (
     drawing_room_data,
     kitchen_data,
     ballroom_data,
-    upstiars_hallway_data
+    upstiars_hallway_data,
+    parlor_data,
+    powder_room_data,
+    crawl_space_data
 )
