@@ -13,7 +13,7 @@ def can_enter_room(room_index):
     return True
 
 def print_message(message, max_length):
-    words = message.split()
+    words = message.split(" ")
     words.reverse()
     line = words.pop()
     words.reverse()
@@ -72,10 +72,12 @@ def experience_room(command_parts):
             if item_to_take in room_items:
                 item_index = room_items.index(item_to_take)
                 item_description = cur_room_data[ROOM_ITEM_DESCRIPTIONS][item_index]
+                item_taken_description = cur_room_data[ROOM_ITEM_TAKEN_DESCRIPTIONS][item_index]
                 add_to_inventory(item_to_take)
                 cur_room_data[ROOM_ITEMS].remove(item_to_take)
                 cur_room_data[ROOM_ITEM_DESCRIPTIONS].remove(item_description)
-                display_message = item_to_take + " taken"
+                cur_room_data[ROOM_ITEM_TAKEN_DESCRIPTIONS].remove(item_taken_description)
+                display_message = item_to_take + " taken\n" + item_taken_description
             else:
                 display_message = "There is no " + item_to_take + " here"
     elif command_parts[0] == "drop":

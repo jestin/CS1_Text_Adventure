@@ -10,8 +10,9 @@ ROOM_UP = 6
 ROOM_DOWN = 7
 ROOM_ITEMS = 8
 ROOM_ITEM_DESCRIPTIONS = 9
-ROOM_ITEM_REQUIREMENTS = 10
-ROOM_ITEM_REQUIREMENTS_MESSAGE = 11
+ROOM_ITEM_TAKEN_DESCRIPTIONS = 10
+ROOM_ITEM_REQUIREMENTS = 11
+ROOM_ITEM_REQUIREMENTS_MESSAGE = 12
 
 entrance_data = (
     "Entrance",
@@ -22,6 +23,7 @@ entrance_data = (
     6,
     5,
     -1,
+    [],
     [],
     [],
     [],
@@ -43,6 +45,7 @@ dining_room_data = (
         "There is an ornate steak knife on the table.",
         "There is a fancy spoon on the table."
     ],
+    ["", "", ""],
     ["bronze key"],
     "The door is locked"
 )
@@ -58,6 +61,7 @@ drawing_room_data = (
     -1,
     ["decanter"],
     ["There is a decanter on the minibar."],
+    [""],
     [],
     ""
 )
@@ -73,6 +77,7 @@ kitchen_data = (
     -1,
     ["cookbook"],
     ["A cookbook laying open on one of the prep tables."],
+    [""],
     [],
     ""
 )
@@ -88,6 +93,7 @@ ballroom_data = (
     -1,
     ["bronze key"],
     ["A bronze key sits on a windowsill"],
+    [""],
     [],
     ""
 )
@@ -101,6 +107,7 @@ upstiars_hallway_data = (
     -1,
     -1,
     0,
+    [],
     [],
     [],
     [],
@@ -119,6 +126,7 @@ parlor_data = (
     [],
     [],
     [],
+    [],
     ""
 )
 
@@ -133,6 +141,7 @@ powder_room_data = (
     8,
     ["rug"],
     ["A rug matching the toilet seat cover is in front of the toilet.  Gross."],
+    ["Removing the rug reveals a trap door"],
     ["decanter"],
     "A ghostly yet booming voice yells \"Bring me a drink if you wish to pass!\""
 )
@@ -146,6 +155,7 @@ crawl_space_data = (
     -1,
     7,
     -1,
+    [],
     [],
     [],
     ["rug"],
