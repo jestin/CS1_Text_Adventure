@@ -13,19 +13,9 @@ ROOM_ITEM_DESCRIPTIONS = 9
 ROOM_ITEM_REQUIREMENTS = 10
 ROOM_ITEM_REQUIREMENTS_MESSAGE = 11
 
-def display_room_info(room):
-    os.system('cls||clear')
-    print("----------------")
-    print(rooms[room][ROOM_NAME])
-    print("")
-    print(rooms[room][ROOM_DESCRIPTION])
-    if len(rooms[room][ROOM_ITEM_DESCRIPTIONS]):
-        print("  ".join(rooms[room][ROOM_ITEM_DESCRIPTIONS]))
-    print("----------------")
-
 entrance_data = (
     "Entrance",
-    "You stand in a large entranceway.  There are rooms to the east and west, a hallway leading north, and a grand staircase leading to the upper floors.",
+    "You stand in a large entranceway.  There are rooms to the east and west, a hallway leading north ends in a closed door, and a grand staircase leading to the upper floors.",
     1,
     -1,
     4,

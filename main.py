@@ -11,6 +11,33 @@ def can_enter_room(room_index):
         if required_item not in inventory:
             return False
     return True
+
+def print_message(message, max_length):
+    words = message.split()
+    words.reverse()
+    line = words.pop()
+    words.reverse()
+
+    for word in words:
+        if len(word) + 1 + len(line) > max_length:
+            print(line)
+            line = word
+        else:
+            line = line + " " + word
+
+    if len(line) > 0:
+        print(line)
+
+def display_room_info(room):
+    os.system('cls||clear')
+    print("----------------")
+    print(rooms[room][ROOM_NAME])
+    print("")
+    print_message(rooms[room][ROOM_DESCRIPTION], 70)
+    if len(rooms[room][ROOM_ITEM_DESCRIPTIONS]):
+        print("  ".join(rooms[room][ROOM_ITEM_DESCRIPTIONS]))
+    print("----------------")
+
         
 def experience_room(command_parts):
     display_message = ""
@@ -71,7 +98,7 @@ def experience_room(command_parts):
         
     # Display output
     print("")
-    print(display_message)
+    print_message(display_message, 70)
     print("")
     return current_room
 
