@@ -10,6 +10,8 @@ ROOM_UP = 6
 ROOM_DOWN = 7
 ROOM_ITEMS = 8
 ROOM_ITEM_DESCRIPTIONS = 9
+ROOM_ITEM_REQUIREMENTS = 10
+ROOM_ITEM_REQUIREMENTS_MESSAGE = 11
 
 def display_room_info(room):
     os.system('cls||clear')
@@ -31,7 +33,9 @@ entrance_data = (
     5,
     -1,
     [],
-    []
+    [],
+    [],
+    ""
 )
 
 dining_room_data = (
@@ -48,7 +52,9 @@ dining_room_data = (
         "There is a single fork on the table.",
         "There is an ornate steak knife on the table.",
         "There is a fancy spoon on the table."
-    ]
+    ],
+    ["bronze key"],
+    "The door is locked"
 )
 
 drawing_room_data = (
@@ -60,8 +66,10 @@ drawing_room_data = (
     -1,
     -1,
     -1,
-    ["decantor"],
-    ["There is a decantor on the minibar."]
+    ["decanter"],
+    ["There is a decanter on the minibar."],
+    [],
+    ""
 )
 
 kitchen_data = (
@@ -74,7 +82,9 @@ kitchen_data = (
     -1,
     -1,
     ["cookbook"],
-    ["A cookbook laying open on one of the prep tables."]
+    ["A cookbook laying open on one of the prep tables."],
+    [],
+    ""
 )
 
 ballroom_data = (
@@ -86,8 +96,10 @@ ballroom_data = (
     0,
     -1,
     -1,
+    ["bronze key"],
+    ["A bronze key sits on a windowsill"],
     [],
-    []
+    ""
 )
 
 upstiars_hallway_data = (
@@ -100,7 +112,9 @@ upstiars_hallway_data = (
     -1,
     0,
     [],
-    []
+    [],
+    [],
+    ""
 )
 
 

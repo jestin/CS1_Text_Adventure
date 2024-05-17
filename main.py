@@ -5,40 +5,37 @@ from rooms import *
 # game state variables
 current_room = 0
 prev_room = -1
+
+def can_enter_room(room_index):
+    for required_item in rooms[room_index][ROOM_ITEM_REQUIREMENTS]:
+        if required_item not in inventory:
+            return False
+    return True
         
 def experience_room(command_parts):
     display_message = ""
     cur_room_data = rooms[current_room]
-    if command_parts[0] == "north":
-        if cur_room_data[ROOM_NORTH] > -1:
-            return cur_room_data[ROOM_NORTH]
-        else:
+    direction = -1
+    if command_parts[0] in ["north", "south", "east", "west", "up", "down"]:
+        if command_parts[0] == "north":
+            direction = ROOM_NORTH
+        elif command_parts[0] == "south":
+            direction = ROOM_SOUTH
+        elif command_parts[0] == "east":
+            direction = ROOM_EAST
+        elif command_parts[0] == "west":
+            direction = ROOM_WEST
+        elif command_parts[0] == "up":
+            direction = ROOM_UP
+        elif command_parts[0] == "down":
+            direction = ROOM_DOWN
+
+        if cur_room_data[direction] < 0:
             display_message = "You can't go that way"
-    elif command_parts[0] == "south":
-        if cur_room_data[ROOM_SOUTH] > -1:
-            return cur_room_data[ROOM_SOUTH]
+        elif not can_enter_room(cur_room_data[direction]):
+            display_message = rooms[cur_room_data[direction]][ROOM_ITEM_REQUIREMENTS_MESSAGE]
         else:
-            display_message = "You can't go that way"
-    elif command_parts[0] == "east":
-        if cur_room_data[ROOM_EAST] > -1:
-            return cur_room_data[ROOM_EAST]
-        else:
-            display_message = "You can't go that way"
-    elif command_parts[0] == "west":
-        if cur_room_data[ROOM_WEST] > -1:
-            return cur_room_data[ROOM_WEST]
-        else:
-            display_message = "You can't go that way"
-    elif command_parts[0] == "up":
-        if cur_room_data[ROOM_UP] > -1:
-            return cur_room_data[ROOM_UP]
-        else:
-            display_message = "You can't go that way"
-    elif command_parts[0] == "down":
-        if cur_room_data[ROOM_DOWN] > -1:
-            return cur_room_data[ROOM_DOWN]
-        else:
-            display_message = "You can't go that way"
+            return cur_room_data[direction]
     elif command_parts[0] == "take":
         if len(command_parts) < 2:
             display_message = "Take what?"
@@ -85,6 +82,9 @@ while True:
         prev_room = current_room
         
     command_parts = get_user_input(current_room)
+
+    if len(command_parts) < 1:
+        continue
     
     # Change the game state
     if command_parts[0] == "quit":
